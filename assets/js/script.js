@@ -16,7 +16,7 @@ var WIDTH = $("body").width() - 20,
 // set some camera attributes
 var VIEW_ANGLE = 45,
 		ASPECT = WIDTH / HEIGHT,
-		NEAR = 0.1,
+		NEAR = 1,
 		FAR = 10000;
 
 var container;
@@ -27,7 +27,8 @@ var centerAltitude;
 var initialcameray = 1000;
 var directionalLight;
 var station;
-var stationVector;
+var stationPosition;
+var stationDelta;
 
 init();
 animate();
@@ -44,13 +45,14 @@ function init() {
 
 	scene = new THREE.Scene();
 
-	t = 0.5;
+	t = 0;
 	scene.add(camera);
 	camerax = 300*Math.sin(Math.PI*t);
 	cameraz = 300*Math.cos(Math.PI*t);
 	cameray = initialcameray;
 	centerAltitude = new THREE.Vector3(0,cameray,0);
-	stationVector = new THREE.Vector3(80,20,80);
+	stationPosition = new THREE.Vector3(80,60,80);
+	stationDelta = new THREE.Vector3(0,0,0);
 	camera.position.set(camerax,cameray,cameraz);
 	camera.lookAt(scene.position);
 	renderer.setSize(WIDTH, HEIGHT);
@@ -88,7 +90,6 @@ function init() {
 
 	station = new THREE.Mesh(
 		new THREE.SphereGeometry(
-			//0.1,
 			5,
 			segments,
 			rings),
@@ -96,9 +97,9 @@ function init() {
 		stationMaterial);
 
 	scene.add(station);
-	station.position.x = stationVector.x;
-	station.position.y = stationVector.y;
-	station.position.z = stationVector.z;
+	station.position.x = stationPosition.x;
+	station.position.y = stationPosition.y;
+	station.position.z = stationPosition.z;
 
 	var ambientLight = new THREE.AmbientLight(0x888888,0.1);
         scene.add(ambientLight);
@@ -141,20 +142,22 @@ $("canvas").click(function(){
 	cameray = initialcameray;
 })
 function animate() {
-	t += 0.0005;
-	stationVector.x = Math.sin(t*Math.pi)*80;
-	stationVector.z = Math.cos(t*Math.pi)*80;
-	//stationVector.z = Math.sin(t*Math.pi)*60;
+	t += 0.005;
+	stationDelta.x = Math.sin(t*Math.PI);
+	stationDelta.y = Math.cos(t*Math.PI);
+	stationDelta.z = Math.sin(t*Math.PI);
 
-	station.position.x = stationVector.x;
-	station.position.y = stationVector.y;
-	station.position.z = stationVector.z;
+	stationPosition.add(stationDelta)
+
+	station.position.x = stationPosition.x;
+	station.position.y = stationPosition.y;
+	station.position.z = stationPosition.z;
 
 	directionalLight.position.set( camerax,cameray,cameraz);
 	WIDTH = $("#canvas").width();
 	HEIGHT = WIDTH = $("#canvas").height();
 	
-	// station.translate(stationVector)
+	// station.translate(stationPosition)
 	camerax = 300*Math.sin(Math.PI*t);
 	cameraz = 300*Math.cos(Math.PI*t);
 
