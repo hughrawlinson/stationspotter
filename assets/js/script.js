@@ -1,3 +1,12 @@
+$("#reporticon").click(function(){
+	$("#reportbox").toggle();
+});
+
+
+
+
+
+
 // set the scene size
 var WIDTH = 800,
 		HEIGHT = 400;
