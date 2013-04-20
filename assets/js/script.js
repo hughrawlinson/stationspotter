@@ -28,7 +28,6 @@ var initialcameray = 1000;
 var directionalLight;
 var station;
 var stationPosition;
-var stationDelta;
 
 init();
 animate();
@@ -51,8 +50,23 @@ function init() {
 	cameraz = 300*Math.cos(Math.PI*t);
 	cameray = initialcameray;
 	centerAltitude = new THREE.Vector3(0,cameray,0);
-	stationPosition = new THREE.Vector3(80,60,80);
-	stationDelta = new THREE.Vector3(0,0,0);
+
+	var latitude = 51.48;
+	var longitude = 0;
+
+	// x = rad * cos(ls) * cos(lon) + alt * cos(lat) * cos(lon)
+ //  y = rad * cos(ls) * sin(lon) + alt * cos(lat) * sin(lon)
+ //  z = rad * sin(ls) + alt * sin(lat)
+	var radius = 120;
+	var altitude = 0;
+	var ls = Math.pow(Math.atan(1),2) * Math.tan(latitude)
+	var x = /*radius * Math.cos(ls) **/ Math.cos(longitude) + altitude * Math.cos(latitude) * Math.cos(longitude);
+	var y = radius * Math.cos(ls) * Math.sin(longitude) + altitude * Math.cos(latitude) * Math.sin(longitude);
+	var z = radius * Math.sin(ls) + Math.sin(latitude) * altitude;
+	console.log(x,y,z);
+	stationPosition = new THREE.Vector3(x,y,z);
+
+	
 	camera.position.set(camerax,cameray,cameraz);
 	camera.lookAt(scene.position);
 	renderer.setSize(WIDTH, HEIGHT);
@@ -143,16 +157,6 @@ $("canvas").click(function(){
 })
 function animate() {
 	t += 0.005;
-	stationDelta.x = Math.sin(t*Math.PI);
-	stationDelta.y = Math.cos(t*Math.PI);
-	stationDelta.z = Math.sin(t*Math.PI);
-
-	stationPosition.add(stationDelta)
-
-	station.position.x = stationPosition.x;
-	station.position.y = stationPosition.y;
-	station.position.z = stationPosition.z;
-
 	directionalLight.position.set( camerax,cameray,cameraz);
 	WIDTH = $("#canvas").width();
 	HEIGHT = WIDTH = $("#canvas").height();
