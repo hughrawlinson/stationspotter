@@ -10,16 +10,14 @@ $("#closeReportBox").click(function(){
 
 
 // set the scene size
-var WIDTH = 800,
-		HEIGHT = 400;
+var WIDTH = $("body").width() - 20,
+		HEIGHT = $("body").height() - 60;
 
 // set some camera attributes
 var VIEW_ANGLE = 45,
 		ASPECT = WIDTH / HEIGHT,
 		NEAR = 0.1,
 		FAR = 10000;
-
-
 
 var container;
 var camera, scene, renderer;
@@ -132,3 +130,10 @@ function render() {
 	// actually display the scene in the Dom element
 	renderer.render( scene, camera );
 }
+$(window).resize(function() {
+  var WIDTH = $("body").width() - 20,
+			HEIGHT = $("body").height() - 60;
+	renderer.setSize(WIDTH, HEIGHT);
+	camera.aspect = WIDTH/HEIGHT;
+	camera.updateProjectionMatrix();
+});

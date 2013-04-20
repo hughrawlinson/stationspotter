@@ -45,11 +45,11 @@ body {
 	cursor: pointer;
 }
 
-#spherecanvas {
+/*#spherecanvas {
 	width: 500px;
 	margin: auto;
 }
-
+*/
 nav {
 	bottom: 0px;
 	height: 50px;
