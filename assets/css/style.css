@@ -1,9 +1,19 @@
+html {
+	height: 100%;
+}
+
 body {
 	background-color: #1b1b1b;
 	color: white;
-	border: solid;
+	border-style: solid;
 	border-width: 10px;
 	border-color: white;
+	height: 100%;
+}
+
+#container {
+	overflow: hidden;
+	padding-bottom: -10px;
 }
 
 #reportbox {
@@ -19,9 +29,8 @@ body {
 
 #reportbox h2 {
 	color: white;
-	font-size: 30pt;
-	margin-left: 10px;
-	margin-top: 10px; 
+	font-size: 32pt;
+	margin: 10px;
 	font-weight: 200;
 }
 
@@ -37,6 +46,15 @@ body {
 #spherecanvas {
 	width: 500px;
 	margin: auto;
+}
+
+nav {
+	bottom: 0px;
+	height: 50px;
+	width: 100%;
+	background-color: white;
+	position: fixed;
+
 }
 
 form {
