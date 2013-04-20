@@ -27,6 +27,7 @@ var centerAltitude;
 var initialcameray = 1000;
 var directionalLight;
 var station;
+var stationVector;
 
 init();
 animate();
@@ -49,6 +50,7 @@ function init() {
 	cameraz = 300*Math.cos(Math.PI*t);
 	cameray = initialcameray;
 	centerAltitude = new THREE.Vector3(0,cameray,0);
+	stationVector = new THREE.Vector3(80,20,80);
 	camera.position.set(camerax,cameray,cameraz);
 	camera.lookAt(scene.position);
 	renderer.setSize(WIDTH, HEIGHT);
@@ -84,9 +86,9 @@ function init() {
 			color: 0xD7D7D7
 		});
 
-
-	var station = new THREE.Mesh(
+	station = new THREE.Mesh(
 		new THREE.SphereGeometry(
+			//0.1,
 			5,
 			segments,
 			rings),
@@ -94,6 +96,9 @@ function init() {
 		stationMaterial);
 
 	scene.add(station);
+	station.position.x = stationVector.x;
+	station.position.y = stationVector.y;
+	station.position.z = stationVector.z;
 
 	var ambientLight = new THREE.AmbientLight(0x888888,0.1);
         scene.add(ambientLight);
@@ -136,11 +141,20 @@ $("canvas").click(function(){
 	cameray = initialcameray;
 })
 function animate() {
+	t += 0.0005;
+	stationVector.x = Math.sin(t*Math.pi)*80;
+	stationVector.z = Math.cos(t*Math.pi)*80;
+	//stationVector.z = Math.sin(t*Math.pi)*60;
+
+	station.position.x = stationVector.x;
+	station.position.y = stationVector.y;
+	station.position.z = stationVector.z;
+
 	directionalLight.position.set( camerax,cameray,cameraz);
 	WIDTH = $("#canvas").width();
 	HEIGHT = WIDTH = $("#canvas").height();
-	t += 0.0005;
-	//station.setPos()
+	
+	// station.translate(stationVector)
 	camerax = 300*Math.sin(Math.PI*t);
 	cameraz = 300*Math.cos(Math.PI*t);
 
