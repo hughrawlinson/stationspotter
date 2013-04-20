@@ -71,3 +71,22 @@ form {
 	margin: 10px;
 	font-weight: 200;
 }
+
+nav ul {
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+nav ul li {
+	display: inline;
+}
+
+nav ul li a {
+	text-decoration: none;
+}
+
+nav ul li a:hover {
+	color: #fff;
+	background-color: #1b1b1b;
+}
