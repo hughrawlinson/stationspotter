@@ -25,6 +25,7 @@ body {
 	border-color: white;
 	border-width: 2px;
 	font-family: 'Titillium Web', sans-serif;
+	display: none;
 }
 
 #reportbox h2 {
