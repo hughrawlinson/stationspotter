@@ -1,6 +1,6 @@
 // set the scene size
-var WIDTH = 400,
-		HEIGHT = 300;
+var WIDTH = 800,
+		HEIGHT = 400;
 
 // set some camera attributes
 var VIEW_ANGLE = 45,
@@ -14,6 +14,8 @@ var container;
 var camera, scene, renderer;
 var camerax,cameray,cameraz;
 var t;
+var centerAltitude;
+var initialcameray = 1000
 
 init();
 animate();
@@ -31,11 +33,12 @@ function init() {
 	scene = new THREE.Scene();
 
 	t = 0.5;
-
 	scene.add(camera);
 	camerax = 300*Math.sin(Math.PI*t);
 	cameraz = 300*Math.cos(Math.PI*t);
-	camera.position.set(camerax,0,cameraz);
+	cameray = initialcameray;
+	centerAltitude = new THREE.Vector3(0,cameray,0);
+	camera.position.set(camerax,cameray,cameraz);
 	camera.lookAt(scene.position);
 	renderer.setSize(WIDTH, HEIGHT);
 	container.append(renderer.domElement);
@@ -88,17 +91,25 @@ function init() {
 	// // add to the scene
 	// scene.add(pointLight2);
 
-	renderer.setClearColor( 0x000000, 1 );
+	renderer.setClearColor( 0x1B1B1B, 1 );
 
 	renderer.render(scene, camera);
 }
 
+$("canvas").click(function(){
+	cameray = initialcameray;
+})
 function animate() {
+	WIDTH = $("#canvas").width();
+	HEIGHT = WIDTH = $("#canvas").height();
 	t += 0.0005;
 	camerax = 300*Math.sin(Math.PI*t);
 	cameraz = 300*Math.cos(Math.PI*t);
-	camera.position.set(camerax,0,cameraz);
-	camera.lookAt(scene.position);
+
+	cameray = cameray / 1.075;
+	centerAltitude.setY(cameray-(cameray/3.5));
+	camera.position.set(camerax,cameray,cameraz);
+	camera.lookAt(centerAltitude);
 	// render the 3D scene
 	renderer.render( scene, camera );
 	// relaunch the 'timer' 
