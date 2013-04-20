@@ -1,0 +1,32 @@
+body {
+	background-color: #1b1b1b;
+	color: white;
+}
+
+#reportbox {
+	width: 400px;
+	height: 600px;
+	background-color: #1b1b1b;
+	position: absolute;
+	border: dotted;
+	border-color: white;
+	border-width: 2px;
+
+}
+
+#reportbox h2 {
+	color: white;
+	margin-left: 10px;
+	margin-top: 10px; 
+	font-weight: 400;
+	font-family: "Neutra Text" ,monaco, courier, mono-spaced;
+}
+
+#spherecanvas {
+	width: 500px;
+	margin: auto;
+}
+
+form {
+	margin: 10px;
+}
