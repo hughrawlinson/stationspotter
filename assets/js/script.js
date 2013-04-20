@@ -1,79 +1,82 @@
 // set the scene size
 var WIDTH = 400,
-  HEIGHT = 300;
+		HEIGHT = 300;
 
 // set some camera attributes
 var VIEW_ANGLE = 45,
-  ASPECT = WIDTH / HEIGHT,
-  NEAR = 0.1,
-  FAR = 10000;
+		ASPECT = WIDTH / HEIGHT,
+		NEAR = 0.1,
+		FAR = 10000;
 
-// get the DOM element to attach to
-// - assume we've got jQuery to hand
-var $container = $('#display');
 
-// create a WebGL renderer, camera
-// and a scene
-var renderer = new THREE.CanvasRenderer();
-var camera =
-  new THREE.PerspectiveCamera(
-    VIEW_ANGLE,
-    ASPECT,
-    NEAR,
-    FAR);
 
-var scene = new THREE.Scene();
+var container;
+var camera, scene, renderer;
 
-// add the camera to the scene
-scene.add(camera);
+init();
 
-// the camera starts at 0,0,0
-// so pull it back
-camera.position.z = 300;
+function init() {
+	var container = $('#display');
+	var renderer = new THREE.CanvasRenderer();
+	var camera =
+		new THREE.PerspectiveCamera(
+			VIEW_ANGLE,
+			ASPECT,
+			NEAR,
+			FAR);
+	var scene = new THREE.Scene();
 
-// start the renderer
-renderer.setSize(WIDTH, HEIGHT);
+	scene.add(camera);
+	camera.position.z = 300;
+	renderer.setSize(WIDTH, HEIGHT);
+	container.append(renderer.domElement);
 
-// attach the render-supplied DOM element
-$container.append(renderer.domElement);
+	var radius = 100,
+			segments = 64,
+			rings = 64;
 
-// set up the sphere vars
-var radius = 50,
-    segments = 16,
-    rings = 16;
+	var sphereMaterial =
+		new THREE.MeshLambertMaterial({
+			color: 0xCC0000
+		});
 
-// create a new mesh with
-// sphere geometry - we will cover
-// the sphereMaterial next!
-var sphere = new THREE.Mesh(
+	var sphere = new THREE.Mesh(
+		new THREE.SphereGeometry(
+			radius,
+			segments,
+			rings),
 
-  new THREE.SphereGeometry(
-    radius,
-    segments,
-    rings),
+		sphereMaterial);
 
-  sphereMaterial);
+	// add the sphere to the scene
+	scene.add(sphere);
 
-// add the sphere to the scene
-scene.add(sphere);
+	// create the sphere's material
 
-// create the sphere's material
-var sphereMaterial =
-  new THREE.MeshLambertMaterial(
-    {
-      color: 0xCC0000
-    });
+	// create a point light
+	var pointLight =
+		new THREE.PointLight(0xFFFFFF);
 
-// create a point light
-var pointLight =
-  new THREE.PointLight(0xFFFFFF);
+	// set its position
+	pointLight.position.x = 20;
+	pointLight.position.y = 50;
+	pointLight.position.z = 130;
 
-// set its position
-pointLight.position.x = 10;
-pointLight.position.y = 50;
-pointLight.position.z = 130;
+	// add to the scene
+	scene.add(pointLight);
 
-// add to the scene
-scene.add(pointLight);
+	var pointLight2 =
+		new THREE.PointLight(0xFFFFFF);
 
-renderer.render(scene, camera);
+	// set its position
+	pointLight2.position.x = -20;
+	pointLight2.position.y = -50;
+	pointLight2.position.z = 130;
+
+	// add to the scene
+	scene.add(pointLight2);
+
+	renderer.setClearColor( 0x000000, 1 );
+
+	renderer.render(scene, camera);
+}
