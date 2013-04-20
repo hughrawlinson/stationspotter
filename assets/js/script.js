@@ -12,22 +12,31 @@ var VIEW_ANGLE = 45,
 
 var container;
 var camera, scene, renderer;
+var camerax,cameray,cameraz;
+var t;
 
 init();
+animate();
 
 function init() {
 	var container = $('#display');
-	var renderer = new THREE.CanvasRenderer();
-	var camera =
+	renderer = new THREE.CanvasRenderer();
+	camera =
 		new THREE.PerspectiveCamera(
 			VIEW_ANGLE,
 			ASPECT,
 			NEAR,
 			FAR);
-	var scene = new THREE.Scene();
+
+	scene = new THREE.Scene();
+
+	t = 0.5;
 
 	scene.add(camera);
-	camera.position.z = 300;
+	camerax = 300*Math.sin(Math.PI*t);
+	cameraz = 300*Math.cos(Math.PI*t);
+	camera.position.set(camerax,0,cameraz);
+	camera.lookAt(scene.position);
 	renderer.setSize(WIDTH, HEIGHT);
 	container.append(renderer.domElement);
 
@@ -40,8 +49,8 @@ function init() {
 
 	var sphereMaterial =
 		new THREE.MeshBasicMaterial({
-			//color: 0xCC0000
-			map:texture
+			color: 0xCC0000
+			//map:texture
 		});
 
 	var sphere = new THREE.Mesh(
@@ -56,30 +65,48 @@ function init() {
 
 	// create the sphere's material
 
-	// create a point light
-	var pointLight =
-		new THREE.PointLight(0xFFFFFF);
+	// // create a point light
+	// var pointLight =
+	// 	new THREE.PointLight(0xFFFFFF);
 
-	// set its position
-	pointLight.position.x = 20;
-	pointLight.position.y = 50;
-	pointLight.position.z = 130;
+	// // set its position
+	// pointLight.position.x = 20;
+	// pointLight.position.y = 50;
+	// pointLight.position.z = 130;
 
-	// add to the scene
-	scene.add(pointLight);
+	// // add to the scene
+	// scene.add(pointLight);
 
-	var pointLight2 =
-		new THREE.PointLight(0xFFFFFF);
+	// var pointLight2 =
+	// 	new THREE.PointLight(0xFFFFFF);
 
-	// set its position
-	pointLight2.position.x = -20;
-	pointLight2.position.y = -50;
-	pointLight2.position.z = 130;
+	// // set its position
+	// pointLight2.position.x = -20;
+	// pointLight2.position.y = -50;
+	// pointLight2.position.z = 130;
 
-	// add to the scene
-	scene.add(pointLight2);
+	// // add to the scene
+	// scene.add(pointLight2);
 
 	renderer.setClearColor( 0x000000, 1 );
 
 	renderer.render(scene, camera);
+}
+
+function animate() {
+	t += 0.0005;
+	camerax = 300*Math.sin(Math.PI*t);
+	cameraz = 300*Math.cos(Math.PI*t);
+	camera.position.set(camerax,0,cameraz);
+	camera.lookAt(scene.position);
+	// render the 3D scene
+	renderer.render( scene, camera );
+	// relaunch the 'timer' 
+	requestAnimationFrame( animate );
+}
+
+// ## Render the 3D Scene
+function render() {
+	// actually display the scene in the Dom element
+	renderer.render( scene, camera );
 }
