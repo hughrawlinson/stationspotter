@@ -1,13 +1,12 @@
 $("#reporticon").click(function(){
-	$("#reportbox").children().hide();
-	$("#reportbox").slideToggle(300,function(){
+	$("#reportbox").slideDown(300,function(){
 		$("#reportbox").children().slideDown(300);
 	});
 });
-
-
-
-
+$("#closeReportBox").click(function(){
+	$("#reportbox").children().hide();
+	$("#reportbox").slideUp(300);
+});
 
 
 // set the scene size
