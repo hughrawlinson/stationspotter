@@ -1,5 +1,8 @@
 $("#reporticon").click(function(){
-	$("#reportbox").toggle();
+	$("#reportbox").children().hide();
+	$("#reportbox").slideToggle(300,function(){
+		$("#reportbox").children().slideDown(300);
+	});
 });
 
 

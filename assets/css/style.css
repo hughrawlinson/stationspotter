@@ -1,5 +1,6 @@
 html {
 	height: 100%;
+	font-family: 'Titillium Web', sans-serif;
 }
 
 body {
@@ -25,7 +26,6 @@ body {
 	border: solid;
 	border-color: white;
 	border-width: 2px;
-	font-family: 'Titillium Web', sans-serif;
 	display: none;
 }
 
@@ -61,6 +61,10 @@ nav {
 
 nav p{
 	color:black;
+}
+
+#reportbox > *{
+	display:none;
 }
 
 form {
