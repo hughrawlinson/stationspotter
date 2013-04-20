@@ -34,17 +34,14 @@ function init() {
 	var radius = 100,
 			segments = 64,
 			rings = 64;
-
-	// var image = new Image();
-	// image.src='assets/img/map.png';
-	// var texture = THREE.ImageUtils.loadTexture(image, {}, function() {
- //    	renderer.render(scene);
-	// });
+	var texture = THREE.ImageUtils.loadTexture('assets/img/map.png', {}, function() {
+		renderer.render(scene, camera);
+	})
 
 	var sphereMaterial =
 		new THREE.MeshBasicMaterial({
-			color: 0xCC0000
-			//map:texture
+			//color: 0xCC0000
+			map:texture
 		});
 
 	var sphere = new THREE.Mesh(
@@ -55,7 +52,6 @@ function init() {
 
 		sphereMaterial);
 
-	// add the sphere to the scene
 	scene.add(sphere);
 
 	// create the sphere's material
