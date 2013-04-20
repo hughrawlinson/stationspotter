@@ -26,6 +26,7 @@ var t;
 var centerAltitude;
 var initialcameray = 1000;
 var directionalLight;
+var station;
 
 init();
 animate();
@@ -78,12 +79,28 @@ function init() {
 
 	scene.add(sphere);
 
-	var ambientLight = new THREE.AmbientLight(0xFFFFFF);
+	var stationMaterial =
+		new THREE.MeshLambertMaterial({
+			color: 0xD7D7D7
+		});
+
+
+	var station = new THREE.Mesh(
+		new THREE.SphereGeometry(
+			5,
+			segments,
+			rings),
+
+		stationMaterial);
+
+	scene.add(station);
+
+	var ambientLight = new THREE.AmbientLight(0x888888,0.1);
         scene.add(ambientLight);
 
- //  directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 1 );
-	// directionalLight.position.set( camerax,cameray,cameraz);
-	// scene.add( directionalLight );
+  directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.4 );
+	directionalLight.position.set( camerax,cameray,cameraz);
+	scene.add( directionalLight );
 
 	// create the sphere's material
 
@@ -119,10 +136,11 @@ $("canvas").click(function(){
 	cameray = initialcameray;
 })
 function animate() {
-	//directionalLight.position.set( camerax,cameray,cameraz);
+	directionalLight.position.set( camerax,cameray,cameraz);
 	WIDTH = $("#canvas").width();
 	HEIGHT = WIDTH = $("#canvas").height();
 	t += 0.0005;
+	//station.setPos()
 	camerax = 300*Math.sin(Math.PI*t);
 	cameraz = 300*Math.cos(Math.PI*t);
 
