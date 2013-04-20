@@ -35,9 +35,16 @@ function init() {
 			segments = 64,
 			rings = 64;
 
+	// var image = new Image();
+	// image.src='assets/img/map.png';
+	// var texture = THREE.ImageUtils.loadTexture(image, {}, function() {
+ //    	renderer.render(scene);
+	// });
+
 	var sphereMaterial =
-		new THREE.MeshLambertMaterial({
+		new THREE.MeshBasicMaterial({
 			color: 0xCC0000
+			//map:texture
 		});
 
 	var sphere = new THREE.Mesh(
