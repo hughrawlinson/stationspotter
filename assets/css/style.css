@@ -84,9 +84,20 @@ nav ul li {
 
 nav ul li a {
 	text-decoration: none;
+	color: black;
 }
 
 nav ul li a:hover {
 	color: #fff;
 	background-color: #1b1b1b;
+	font-size: 32px;
+}
+
+nav #left {
+	float: left;
+}
+
+nav #right {
+	position: absolute;
+	right: 10px;
 }
