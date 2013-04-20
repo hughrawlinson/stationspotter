@@ -24,14 +24,15 @@ var camera, scene, renderer;
 var camerax,cameray,cameraz;
 var t;
 var centerAltitude;
-var initialcameray = 1000
+var initialcameray = 1000;
+var directionalLight;
 
 init();
 animate();
 
 function init() {
 	var container = $('#display');
-	renderer = new THREE.CanvasRenderer();
+	renderer = new THREE.WebGLRenderer();
 	camera =
 		new THREE.PerspectiveCamera(
 			VIEW_ANGLE,
@@ -54,14 +55,15 @@ function init() {
 
 	var radius = 100,
 			segments = 64,
-			rings = 64;
+			rings = 65;
 	var texture = THREE.ImageUtils.loadTexture('assets/img/map.png', {}, function() {
 		renderer.render(scene, camera);
 	})
 
 	var sphereMaterial =
-		new THREE.MeshBasicMaterial({
-			color: 0xCC0000
+		new THREE.MeshLambertMaterial({
+			//color: 0xCC0000
+			map: THREE.ImageUtils.loadTexture( "assets/img/map.png" )
 			//map:texture
 		});
 
@@ -74,6 +76,13 @@ function init() {
 		sphereMaterial);
 
 	scene.add(sphere);
+
+	var ambientLight = new THREE.AmbientLight(0xFFFFFF);
+        scene.add(ambientLight);
+
+ //  directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 1 );
+	// directionalLight.position.set( camerax,cameray,cameraz);
+	// scene.add( directionalLight );
 
 	// create the sphere's material
 
@@ -109,6 +118,7 @@ $("canvas").click(function(){
 	cameray = initialcameray;
 })
 function animate() {
+	//directionalLight.position.set( camerax,cameray,cameraz);
 	WIDTH = $("#canvas").width();
 	HEIGHT = WIDTH = $("#canvas").height();
 	t += 0.0005;
