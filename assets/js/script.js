@@ -63,7 +63,8 @@ function init() {
 	var sphereMaterial =
 		new THREE.MeshLambertMaterial({
 			//color: 0xCC0000
-			map: THREE.ImageUtils.loadTexture( "assets/img/map.png" )
+			map: THREE.ImageUtils.loadTexture( "assets/img/map.png" ),
+			transparent:true
 			//map:texture
 		});
 
