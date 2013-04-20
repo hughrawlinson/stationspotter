@@ -18,7 +18,7 @@ body {
 }
 
 #reportbox {
-	display:none;
+	display: none;
 	width: 400px;
 	height: 300px;
 	background-color: #1b1b1b;
@@ -26,7 +26,6 @@ body {
 	border: solid;
 	border-color: white;
 	border-width: 2px;
-	display: none;
 }
 
 #reportbox h2 {
@@ -37,6 +36,39 @@ body {
 }
 
 #reportbox a {
+	font-weight: 200;
+	text-decoration: underline;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	cursor: pointer;
+}
+
+#aboutbox {
+	display:none;
+	right: 0px;
+	width: 400px;
+	height: 300px;
+	background-color: #1b1b1b;
+	position: absolute;
+	border: solid;
+	border-color: white;
+	border-width: 2px;
+}
+
+#aboutbox h2 {
+	color: white;
+	font-size: 32pt;
+	margin: 10px;
+	font-weight: 200;
+}
+
+#aboutbox table {
+	margin: 10px;
+	font-weight: 200;
+}
+
+#aboutbox a {
 	font-weight: 200;
 	text-decoration: underline;
 	position: absolute;

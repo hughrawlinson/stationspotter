@@ -8,6 +8,16 @@ $("#closeReportBox").click(function(){
 	$("#reportbox").slideUp(300);
 });
 
+$("#abouticon").click(function(){
+	$("#aboutbox").slideDown(300,function(){
+		$("#aboutbox").children().slideDown(300);
+	});
+});
+$("#closeAboutBox").click(function(){
+	$("#aboutbox").children().hide();
+	$("#aboutbox").slideUp(300);
+});
+
 
 // set the scene size
 var WIDTH = $("body").width() - 20,
