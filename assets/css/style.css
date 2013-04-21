@@ -177,3 +177,14 @@ nav #right {
 	border: none;
 	cursor: pointer;
 }
+
+ input[type="range"]{
+   background-color: #1b1b1b;
+   margin: auto;
+   position: absolute;
+
+ }
+
+ input[type="range"]::-webkit-slider-thumb{
+   -webkit-appearance:none !important;  
+ }
