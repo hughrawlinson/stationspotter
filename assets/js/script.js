@@ -30,7 +30,7 @@ channel.bind('sighting', function(data) {
 
 		userMaterial);
 	scene.add(user);
-	coords = lla2ecef(data.longitude,data.latitude,0);
+	coords = lla2ecef(data.latitude,data.longitude,0);
 
 	user.position.x = coords[0];
 	user.position.y = coords[1];
@@ -60,7 +60,7 @@ function parseResponse(data){
   latitude = data.data.iss_position.latitude;
 	longitude = data.data.iss_position.longitude;
 
-	coords = lla2ecef(-1*latitude,longitude,altitude);
+	coords = lla2ecef(latitude,longitude,altitude);
 	stationPosition.set(coords[0],coords[1],coords[2]);
 
 	station.position.x = stationPosition.x;
@@ -102,8 +102,8 @@ function lla2ecef(latitudeArg,longitudeArg,altitudeArg) {
 	var xyz = [0, 0, 0]; // output
 
 	xyz[0] = (100+altitudeArg)*Math.cos(lat) * Math.cos(lon);
-	xyz[1] = (100+altitudeArg)*Math.cos(lat) * Math.sin(lon);
-	xyz[2] = (100+altitudeArg)*Math.sin(lat);
+	xyz[1] = (100+altitudeArg)*Math.sin(lat);
+	xyz[2] = (100+altitudeArg)*Math.cos(lat) * Math.sin(lon);
 
 	return xyz;
 }
@@ -179,25 +179,6 @@ function init() {
 		sphereMaterial);
 
 	scene.add(sphere);
-
-	var userMaterial =
-		new THREE.MeshLambertMaterial({
-			color: 0x00FFFF
-		});
-
-	var user = new THREE.Mesh(
-		new THREE.SphereGeometry(
-			1,
-			10,
-			10),
-
-		userMaterial);
-	scene.add(user);
-	coords = lla2ecef(-17,-67,0);
-
-	user.position.x = coords[0];
-	user.position.y = coords[1];
-	user.position.z = coords[2];
 
 	var stationMaterial =
 		new THREE.MeshLambertMaterial({
