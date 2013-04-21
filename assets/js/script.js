@@ -69,45 +69,42 @@ function parseResponse(data){
 };
 
 function lla2ecef(latitudeArg,longitudeArg,altitudeArg) {
-	// var lat = -latitudeArg*Math.PI/180.0;
-	// var lon = longitudeArg*Math.PI/180.0;
-	// var alt = altitudeArg;
+
+	var pi = 3.14159265358979323846;
+	var halfPi = 0.5 * pi;
+	var twoPi = 2.0 * pi;
+
+	var _latitude = -1*latitudeArg;
+	var _longitude = longitudeArg;
+
+	var fullCircle = 360.0;
+	var halfCircle = 180.0;
+
+	var lat = (_latitude / fullCircle) * twoPi;
+	var lon = (_longitude / fullCircle) * twoPi;
+
+	while (lat < halfPi) {
+	    lat += pi;
+	} 
+
+	while (lat > halfPi) {
+	    lat -= pi;
+	}
+
+	while (lon < -pi) {
+	    lon += twoPi;
+	}
+
+	while (lon > pi) {
+	    lon -= twoPi;
+	}
 
 	var xyz = [0, 0, 0]; // output
 
-	var phi;
-	var theta;
+	xyz[0] = (100+altitudeArg)*Math.cos(lat) * Math.cos(lon);
+	xyz[1] = (100+altitudeArg)*Math.cos(lat) * Math.sin(lon);
+	xyz[2] = (100+altitudeArg)*Math.sin(lat);
 
-	if(latitudeArg>0){
-		phi = 90 - latitudeArg;
-	}
-	else{
-		phi = 90 + latitudeArg;
-	}
-
-	if(longitudeArg>0){
-		theta = longitudeArg;
-	}
-	else{
-		theta = -longitudeArg;
-	}
-
-	phi = phi*(Math.PI/180);
-	theta = theta*(Math.PI/180);
-
-	xyz[0] = (100+altitudeArg) * Math.cos(theta) * Math.sin(phi);
-	xyz[1] = (100+altitudeArg) * Math.sin(theta) * Math.sin(phi);
-	xyz[2] = (100+altitudeArg) * Math.cos(phi);
-	
-	// var A = 100.0;			// earth semimajor axis in meters 
-	// var F = 1.0/298.257223563; 	// reciprocal flattening 
-	// var E2 = 2*F - F*F; // eccentricity squared 
-	
-	// var chi = Math.sqrt(1-E2*Math.sin(lat)*Math.sin(lat));
-	
-	// xyz[0] = (A/chi + alt)*Math.cos(lat)*Math.cos(lon);
-	// xyz[1] = (A/chi + alt)*Math.cos(lat)*Math.sin(lon);
-	// xyz[2] = (A*(1.0-E2)/chi + alt)*Math.sin(lat);
 	return xyz;
 }
 
