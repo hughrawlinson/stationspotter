@@ -19,7 +19,7 @@ channel.bind('sighting', function(data) {
   alert(data);
 });
 
-$("#reportbox submit").click(){
+$("#reportbox submit").click(function(){
 	d = new Object();
 	if (navigator.geolocation){
     navigator.geolocation.watchPosition(function(location){
@@ -28,7 +28,7 @@ $("#reportbox submit").click(){
     	$.post("http://stg.crossfreq.com:3000",d);
     });
   }
-}
+});
 
 setInterval(function(){
 	$("body").append("<script type='text/javascript' src='http://open-notify-api.herokuapp.com/iss-now.json?callback=parseResponse&_=1366507466900'></script>")
