@@ -180,9 +180,8 @@ nav #right {
 
  input[type="range"]{
    background-color: #1b1b1b;
-   margin: auto;
    position: absolute;
-
+   margin-left: 400px;
  }
 
  input[type="range"]::-webkit-slider-thumb{
