@@ -116,7 +116,7 @@ nav ul li {
 }
 
 nav ul li a {
-	text-decoration: none;
+	text-decoration: underline;
 	color: black;
 	cursor: pointer;
 }
