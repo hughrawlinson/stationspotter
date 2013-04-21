@@ -177,3 +177,11 @@ nav #right {
 	border: none;
 	cursor: pointer;
 }
+
+#slider {
+	position: absolute;
+	top: 10px;
+	margin: auto;
+	width: 400px;
+	height: 100px;
+}
