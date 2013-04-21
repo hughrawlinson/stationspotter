@@ -16,7 +16,24 @@ var altitude = 7;
 var pusher = new Pusher('1ccd6fd9880863b97f0d');
 var channel = pusher.subscribe('space_apps');
 channel.bind('sighting', function(data) {
-  alert(data);
+  var sphereMaterial =
+		new THREE.MeshLambertMaterial({
+			color: 0xCC0000
+		});
+
+	var sphere = new THREE.Mesh(
+		new THREE.SphereGeometry(
+			1,
+			10,
+			10),
+
+		sphereMaterial);
+	scene.add(sphere);
+	coords = lla2ecef(data.latitude,data.longitude,0);
+
+	sphere.position.x = coords[0];
+	sphere.position.y = -coords[1];
+	sphere.position.z = coords[2];
 });
 
 $("#submit").click(function(){
