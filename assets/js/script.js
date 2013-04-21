@@ -19,7 +19,7 @@ channel.bind('sighting', function(data) {
   alert(data);
 });
 
-$("#reportbox submit").click(function(){
+$("submit").click(function(){
 	d = new Object();
 	if (navigator.geolocation){
     navigator.geolocation.watchPosition(function(location){
@@ -28,6 +28,7 @@ $("#reportbox submit").click(function(){
     	$.post("http://stg.crossfreq.com:3000",d);
     });
   }
+  return 1;
 });
 
 setInterval(function(){
@@ -57,7 +58,7 @@ function lla2ecef(latitude,longitude,altitude) {
 	var xyz = [0, 0, 0]; // output
 	
 	var A = 100.0;			// earth semimajor axis in meters 
-	var F = 0.1; 	// reciprocal flattening 
+	var F = 0; 	// reciprocal flattening 
 	var E2 = 2*F - F*F; // eccentricity squared 
 	
 	var chi = Math.sqrt(1-E2*Math.sin(lat)*Math.sin(lat));
