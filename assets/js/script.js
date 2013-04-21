@@ -13,6 +13,23 @@ $(".customModalClose").click(function(){
 var radius = 119;
 var altitude = 7;
 
+var pusher = new Pusher('1ccd6fd9880863b97f0d');
+var channel = pusher.subscribe('space_apps');
+channel.bind('sighting', function(data) {
+  alert(data);
+});
+
+$("#reportbox submit").click(){
+	d = new Object();
+	if (navigator.geolocation){
+    navigator.geolocation.watchPosition(function(location){
+    	d.latitude = location.coords.latitude;
+    	d.longitude = location.coords.longitude;
+    	$.post("http://stg.crossfreq.com:3000",d);
+    });
+  }
+}
+
 setInterval(function(){
 	$("body").append("<script type='text/javascript' src='http://open-notify-api.herokuapp.com/iss-now.json?callback=parseResponse&_=1366507466900'></script>")
 },1000);
@@ -40,7 +57,7 @@ function lla2ecef(latitude,longitude,altitude) {
 	var xyz = [0, 0, 0]; // output
 	
 	var A = 100.0;			// earth semimajor axis in meters 
-	var F = 0; 	// reciprocal flattening 
+	var F = 0.1; 	// reciprocal flattening 
 	var E2 = 2*F - F*F; // eccentricity squared 
 	
 	var chi = Math.sqrt(1-E2*Math.sin(lat)*Math.sin(lat));
