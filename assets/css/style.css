@@ -136,3 +136,9 @@ nav #right {
 	position: absolute;
 	right: 20px;
 }
+
+#logo {
+	position: absolute;
+	margin-top: 20px;
+	margin-left: 20px;
+}
