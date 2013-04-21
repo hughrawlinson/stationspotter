@@ -60,7 +60,7 @@ function parseResponse(data){
   latitude = data.data.iss_position.latitude;
 	longitude = data.data.iss_position.longitude;
 
-	coords = lla2ecef(latitude,longitude,altitude);
+	coords = lla2ecef(-1*latitude,longitude,altitude);
 	stationPosition.set(coords[0],coords[1],coords[2]);
 
 	station.position.x = stationPosition.x;
@@ -74,7 +74,7 @@ function lla2ecef(latitudeArg,longitudeArg,altitudeArg) {
 	var halfPi = 0.5 * pi;
 	var twoPi = 2.0 * pi;
 
-	var _latitude = -1*latitudeArg;
+	var _latitude = latitudeArg;
 	var _longitude = longitudeArg;
 
 	var fullCircle = 360.0;
