@@ -6,7 +6,7 @@ var pusher = new Pusher({ appId: "38442", key: "1ccd6fd9880863b97f0d", secret: "
 
 http.createServer(function (req, result) {
 	console.log('1');
-	var url_parts = url.parse(request.url, true);
+	var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
 	console.log(query)
 	pusher.trigger( "space_apps", "sighting", query );

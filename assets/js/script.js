@@ -25,7 +25,7 @@ $("#submit").click(function(){
     navigator.geolocation.watchPosition(function(location){
     	d.latitude = location.coords.latitude;
     	d.longitude = location.coords.longitude;
-    	$.post("http://stg.crossfreq.com:3000",d);
+    	$.get("http://stg.crossfreq.com:3000",d);
     });
   }
   return 1;
