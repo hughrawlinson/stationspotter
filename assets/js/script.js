@@ -75,7 +75,7 @@ function lla2ecef(latitudeArg,longitudeArg,altitudeArg) {
 	var twoPi = 2.0 * pi;
 
 	var _latitude = latitudeArg;
-	var _longitude = longitudeArg;
+	var _longitude = -longitudeArg;
 
 	var fullCircle = 360.0;
 	var halfCircle = 180.0;
