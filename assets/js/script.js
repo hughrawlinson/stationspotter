@@ -12,6 +12,7 @@ $(".customModalClose").click(function(){
 
 var radius = 119;
 var altitude = 7;
+var rotateSpeed = 1;
 
 var pusher = new Pusher('1ccd6fd9880863b97f0d');
 var channel = pusher.subscribe('space_apps');
@@ -59,8 +60,6 @@ function parseResponse(data){
   latitude = data.data.iss_position.latitude;
 	longitude = data.data.iss_position.longitude;
 
-	console.log(data.data.iss_position);
-
 	coords = lla2ecef(latitude,longitude,altitude);
 	stationPosition.set(coords[0],coords[1],coords[2]);
 
@@ -70,22 +69,45 @@ function parseResponse(data){
 };
 
 function lla2ecef(latitudeArg,longitudeArg,altitudeArg) {
-	var lat = -latitudeArg*Math.PI/180.0;
-	var lon = longitudeArg*Math.PI/180.0;
-	var alt = altitudeArg;
-	
+	// var lat = -latitudeArg*Math.PI/180.0;
+	// var lon = longitudeArg*Math.PI/180.0;
+	// var alt = altitudeArg;
+
 	var xyz = [0, 0, 0]; // output
+
+	var phi;
+	var theta;
+
+	if(latitudeArg>0){
+		phi = 90 - latitudeArg;
+	}
+	else{
+		phi = 90 + latitudeArg;
+	}
+
+	if(longitudeArg>0){
+		theta = longitudeArg;
+	}
+	else{
+		theta = -longitudeArg;
+	}
+
+	phi = phi*(Math.PI/180);
+	theta = theta*(Math.PI/180);
+
+	xyz[0] = (100+altitudeArg) * Math.cos(theta) * Math.sin(phi);
+	xyz[1] = (100+altitudeArg) * Math.sin(theta) * Math.sin(phi);
+	xyz[2] = (100+altitudeArg) * Math.cos(phi);
 	
-	var A = 100.0;			// earth semimajor axis in meters 
-	var F = 1.0/298.257223563; 	// reciprocal flattening 
-	var E2 = 2*F - F*F; // eccentricity squared 
+	// var A = 100.0;			// earth semimajor axis in meters 
+	// var F = 1.0/298.257223563; 	// reciprocal flattening 
+	// var E2 = 2*F - F*F; // eccentricity squared 
 	
-	var chi = Math.sqrt(1-E2*Math.sin(lat)*Math.sin(lat));
+	// var chi = Math.sqrt(1-E2*Math.sin(lat)*Math.sin(lat));
 	
-	xyz[0] = (A/chi + alt)*Math.cos(lat)*Math.cos(lon);
-	xyz[1] = (A/chi + alt)*Math.cos(lat)*Math.sin(lon);
-	xyz[2] = (A*(1.0-E2)/chi + alt)*Math.sin(lat);
-	console.log(xyz)
+	// xyz[0] = (A/chi + alt)*Math.cos(lat)*Math.cos(lon);
+	// xyz[1] = (A/chi + alt)*Math.cos(lat)*Math.sin(lon);
+	// xyz[2] = (A*(1.0-E2)/chi + alt)*Math.sin(lat);
 	return xyz;
 }
 
@@ -211,8 +233,12 @@ $("canvas").click(function(){
 	cameray = initialcameray;
 })
 
+$("#slider").change(function(){
+	rotateSpeed = $(this).val();
+})
+
 function animate() {
-	t += 0.0005;
+	t += 0.0005 * rotateSpeed;
 	directionalLight.position.set( camerax,cameray,cameraz);
 	WIDTH = $("#canvas").width();
 	HEIGHT = WIDTH = $("#canvas").height();
