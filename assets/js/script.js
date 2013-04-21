@@ -23,7 +23,7 @@ channel.bind('sighting', function(data) {
 
 	var sphere = new THREE.Mesh(
 		new THREE.SphereGeometry(
-			90,
+			4,
 			10,
 			10),
 
