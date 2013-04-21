@@ -32,7 +32,7 @@ channel.bind('sighting', function(data) {
 	coords = lla2ecef(data.longitude,data.latitude,0);
 
 	user.position.x = coords[0];
-	user.position.y = -coords[1];
+	user.position.y = coords[1];
 	user.position.z = coords[2];
 });
 
@@ -59,6 +59,8 @@ function parseResponse(data){
   latitude = data.data.iss_position.latitude;
 	longitude = data.data.iss_position.longitude;
 
+	console.log(data.data.iss_position);
+
 	coords = lla2ecef(latitude,longitude,altitude);
 	stationPosition.set(coords[0],coords[1],coords[2]);
 
@@ -68,20 +70,20 @@ function parseResponse(data){
 };
 
 function lla2ecef(latitudeArg,longitudeArg,altitudeArg) {
-	var lat = latitudeArg*Math.PI/180.0;
+	var lat = -latitudeArg*Math.PI/180.0;
 	var lon = longitudeArg*Math.PI/180.0;
 	var alt = altitudeArg;
 	
 	var xyz = [0, 0, 0]; // output
 	
 	var A = 100.0;			// earth semimajor axis in meters 
-	var F = 1.0/298.257223563;; 	// reciprocal flattening 
+	var F = 1.0/298.257223563; 	// reciprocal flattening 
 	var E2 = 2*F - F*F; // eccentricity squared 
 	
 	var chi = Math.sqrt(1-E2*Math.sin(lat)*Math.sin(lat));
 	
 	xyz[0] = (A/chi + alt)*Math.cos(lat)*Math.cos(lon);
-	xyz[1] = -(A/chi + alt)*Math.cos(lat)*Math.sin(lon);
+	xyz[1] = (A/chi + alt)*Math.cos(lat)*Math.sin(lon);
 	xyz[2] = (A*(1.0-E2)/chi + alt)*Math.sin(lat);
 	console.log(xyz)
 	return xyz;
@@ -158,6 +160,25 @@ function init() {
 		sphereMaterial);
 
 	scene.add(sphere);
+
+	var userMaterial =
+		new THREE.MeshLambertMaterial({
+			color: 0x00FFFF
+		});
+
+	var user = new THREE.Mesh(
+		new THREE.SphereGeometry(
+			1,
+			10,
+			10),
+
+		userMaterial);
+	scene.add(user);
+	coords = lla2ecef(-17,-67,0);
+
+	user.position.x = coords[0];
+	user.position.y = coords[1];
+	user.position.z = coords[2];
 
 	var stationMaterial =
 		new THREE.MeshLambertMaterial({
