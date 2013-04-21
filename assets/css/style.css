@@ -108,7 +108,7 @@ nav p{
 	color:black;
 }
 
-#reportbox > *{
+.customModal > *{
 	display:none;
 }
 
