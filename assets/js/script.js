@@ -18,7 +18,7 @@ var channel = pusher.subscribe('space_apps');
 channel.bind('sighting', function(data) {
   var sphereMaterial =
 		new THREE.MeshLambertMaterial({
-			color: 0xCC0000
+			color: 0x00FFFF
 		});
 
 	var sphere = new THREE.Mesh(
