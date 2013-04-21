@@ -63,20 +63,30 @@ body {
 	color: white;
 	font-size: 32pt;
 	margin: 10px;
+	margin-top: 5px !important;
 	font-weight: 200;
 }
 
-#aboutbox table {
+#aboutbox p {
+	color: white;
+	font-size: 14px;
 	margin: 10px;
 	font-weight: 200;
 }
 
-#aboutbox a {
+.nasalinks {
+	color: white;
+	font-weight: 200;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#closeAboutBox {
 	font-weight: 200;
 	text-decoration: underline;
 	position: absolute;
 	right: 10px;
-	bottom: 10px;
+	top: 10px;
 	cursor: pointer;
 }
 
