@@ -19,7 +19,7 @@ channel.bind('sighting', function(data) {
   alert(data);
 });
 
-$("submit").click(function(){
+$("#submit").click(function(){
 	d = new Object();
 	if (navigator.geolocation){
     navigator.geolocation.watchPosition(function(location){
