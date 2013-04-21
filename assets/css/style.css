@@ -21,6 +21,8 @@ body {
 	display: none;
 	width: 400px;
 	height: 300px;
+	left: 9px;
+	bottom: 40px;
 	background-color: #1b1b1b;
 	position: absolute;
 	border: solid;
@@ -46,7 +48,8 @@ body {
 
 #aboutbox {
 	display:none;
-	right: 0px;
+	right: 9px;
+	bottom: 40px;
 	width: 400px;
 	height: 300px;
 	background-color: #1b1b1b;
@@ -148,4 +151,17 @@ nav #right {
 	position: absolute;
 	margin-top: 20px;
 	right: 25px;
+}
+
+#submit {
+	color: #1b1b1b;
+	background-color: #fff;
+	text-decoration: underline;
+	font-weight: 200;
+	font-size: 12px;
+	width: 100px;
+	height: 20px;
+	margin-left: 2px;
+	border: none;
+	cursor: pointer;
 }
