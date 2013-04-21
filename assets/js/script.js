@@ -8,6 +8,26 @@ $("#closeReportBox").click(function(){
 	$("#reportbox").slideUp(300);
 });
 
+function lla2ecef(latitude,longitude,altitude) {
+	var lat = latitude*Math.PI/180.0;
+	var lon = longitude*Math.PI/180.0;
+	var alt = altitude;
+	
+	var xyz = [0, 0, 0]; // output
+	
+	var A = 100.0;			// earth semimajor axis in meters 
+	var F = 0; 	// reciprocal flattening 
+	var E2 = 2*F - F*F; // eccentricity squared 
+	
+	var chi = Math.sqrt(1-E2*Math.sin(lat)*Math.sin(lat));
+	
+	xyz[0] = (A/chi + alt)*Math.cos(lat)*Math.cos(lon);
+	xyz[1] = (A/chi + alt)*Math.cos(lat)*Math.sin(lon);
+	xyz[2] = (A*(1.0-E2)/chi + alt)*Math.sin(lat);
+	
+	return xyz;
+}
+
 $("#abouticon").click(function(){
 	$("#aboutbox").slideDown(300,function(){
 		$("#aboutbox").children().slideDown(300);
@@ -17,7 +37,6 @@ $("#closeAboutBox").click(function(){
 	$("#aboutbox").children().hide();
 	$("#aboutbox").slideUp(300);
 });
-
 
 // set the scene size
 var WIDTH = $("body").width() - 20,
@@ -61,20 +80,30 @@ function init() {
 	cameray = initialcameray;
 	centerAltitude = new THREE.Vector3(0,cameray,0);
 
-	var latitude = 51.48;
-	var longitude = 0;
+	var latitude = 0;
+	var longitude = 51.48;
 
 	// x = rad * cos(ls) * cos(lon) + alt * cos(lat) * cos(lon)
  //  y = rad * cos(ls) * sin(lon) + alt * cos(lat) * sin(lon)
  //  z = rad * sin(ls) + alt * sin(lat)
-	var radius = 120;
-	var altitude = 0;
-	var ls = Math.pow(Math.atan(1),2) * Math.tan(latitude)
-	var x = /*radius * Math.cos(ls) **/ Math.cos(longitude) + altitude * Math.cos(latitude) * Math.cos(longitude);
-	var y = radius * Math.cos(ls) * Math.sin(longitude) + altitude * Math.cos(latitude) * Math.sin(longitude);
-	var z = radius * Math.sin(ls) + Math.sin(latitude) * altitude;
-	console.log(x,y,z);
-	stationPosition = new THREE.Vector3(x,y,z);
+ //  ls = atan((1 - f)**2 * tan(lat))
+	 var radius = 119;
+	 var altitude = 7;
+
+	coords = lla2ecef(latitude,longitude,altitude);
+	// var f = 0;
+	// var ls = Math.atan(Math.pow((1-f),2) * Math.tan(latitude));
+	// //var ls = 0;
+	// var x = radius * Math.cos(ls) * Math.cos(longitude) + altitude * Math.cos(latitude) * Math.cos(longitude);
+	// var y = radius * Math.cos(ls) * Math.sin(longitude) + altitude * Math.cos(latitude) * Math.sin(longitude);
+	// var z = radius * Math.sin(ls) + Math.sin(latitude) * altitude;
+
+	// r = radius + altitude;
+	// x = r * Math.cos(longitude) * Math.sin(latitude);
+	// y = r * Math.sin(longitude) * Math.sin(latitude);
+	// z = r * Math.cos(latitude);
+	//console.log(x,y,z,ls);
+	stationPosition = new THREE.Vector3(coords[0],coords[1],coords[2]);
 
 	
 	camera.position.set(camerax,cameray,cameraz);
@@ -114,7 +143,7 @@ function init() {
 
 	station = new THREE.Mesh(
 		new THREE.SphereGeometry(
-			5,
+			1,
 			segments,
 			rings),
 
