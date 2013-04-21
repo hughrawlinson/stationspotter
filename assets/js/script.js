@@ -1,12 +1,33 @@
-$("#reporticon").click(function(){
-	$("#reportbox").slideDown(300,function(){
-		$("#reportbox").children().slideDown(300);
+$(".customModalTrigger").click(function(){
+	$($(this).attr("data-targetid")).slideDown(300,function(){
+		$($(this).attr("data-targetid")).children().slideDown(300);
 	});
 });
-$("#closeReportBox").click(function(){
-	$("#reportbox").children().hide();
-	$("#reportbox").slideUp(300);
+$("#customModalClose").click(function(){
+	$($(this).attr("data-targetid")).children().hide();
+	$($(this).attr("data-targetid")).slideUp(300);
 });
+
+var radius = 119;
+var altitude = 7;
+
+setInterval(function(){
+	$("body").append("<script type='text/javascript' src='http://open-notify-api.herokuapp.com/iss-now.json?callback=parseResponse&_=1366507466900'></script>")
+},1000);
+
+var latitude;
+var longitude;
+function parseResponse(data){
+  latitude = data.data.iss_position.latitude;
+	longitude = data.data.iss_position.longitude;
+
+	coords = lla2ecef(latitude,longitude,altitude);
+	stationPosition = new THREE.Vector3(coords[0],coords[1],coords[2]);
+
+	station.position.x = stationPosition.x;
+	station.position.y = -stationPosition.y;
+	station.position.z = stationPosition.z;
+};
 
 function lla2ecef(latitude,longitude,altitude) {
 	var lat = latitude*Math.PI/180.0;
@@ -27,16 +48,6 @@ function lla2ecef(latitude,longitude,altitude) {
 	
 	return xyz;
 }
-
-$("#abouticon").click(function(){
-	$("#aboutbox").slideDown(300,function(){
-		$("#aboutbox").children().slideDown(300);
-	});
-});
-$("#closeAboutBox").click(function(){
-	$("#aboutbox").children().hide();
-	$("#aboutbox").slideUp(300);
-});
 
 // set the scene size
 var WIDTH = $("body").width() - 20,
@@ -79,32 +90,6 @@ function init() {
 	cameraz = 300*Math.cos(Math.PI*t);
 	cameray = initialcameray;
 	centerAltitude = new THREE.Vector3(0,cameray,0);
-
-	var latitude = 0;
-	var longitude = 51.48;
-
-	// x = rad * cos(ls) * cos(lon) + alt * cos(lat) * cos(lon)
- //  y = rad * cos(ls) * sin(lon) + alt * cos(lat) * sin(lon)
- //  z = rad * sin(ls) + alt * sin(lat)
- //  ls = atan((1 - f)**2 * tan(lat))
-	 var radius = 119;
-	 var altitude = 7;
-
-	coords = lla2ecef(latitude,longitude,altitude);
-	// var f = 0;
-	// var ls = Math.atan(Math.pow((1-f),2) * Math.tan(latitude));
-	// //var ls = 0;
-	// var x = radius * Math.cos(ls) * Math.cos(longitude) + altitude * Math.cos(latitude) * Math.cos(longitude);
-	// var y = radius * Math.cos(ls) * Math.sin(longitude) + altitude * Math.cos(latitude) * Math.sin(longitude);
-	// var z = radius * Math.sin(ls) + Math.sin(latitude) * altitude;
-
-	// r = radius + altitude;
-	// x = r * Math.cos(longitude) * Math.sin(latitude);
-	// y = r * Math.sin(longitude) * Math.sin(latitude);
-	// z = r * Math.cos(latitude);
-	//console.log(x,y,z,ls);
-	stationPosition = new THREE.Vector3(coords[0],coords[1],coords[2]);
-
 	
 	camera.position.set(camerax,cameray,cameraz);
 	camera.lookAt(scene.position);
@@ -150,9 +135,6 @@ function init() {
 		stationMaterial);
 
 	scene.add(station);
-	station.position.x = stationPosition.x;
-	station.position.y = stationPosition.y;
-	station.position.z = stationPosition.z;
 
 	var ambientLight = new THREE.AmbientLight(0x888888,0.1);
         scene.add(ambientLight);
@@ -160,31 +142,6 @@ function init() {
   directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.4 );
 	directionalLight.position.set( camerax,cameray,cameraz);
 	scene.add( directionalLight );
-
-	// create the sphere's material
-
-	// // create a point light
-	// var pointLight =
-	// 	new THREE.PointLight(0xFFFFFF);
-
-	// // set its position
-	// pointLight.position.x = 20;
-	// pointLight.position.y = 50;
-	// pointLight.position.z = 130;
-
-	// // add to the scene
-	// scene.add(pointLight);
-
-	// var pointLight2 =
-	// 	new THREE.PointLight(0xFFFFFF);
-
-	// // set its position
-	// pointLight2.position.x = -20;
-	// pointLight2.position.y = -50;
-	// pointLight2.position.z = 130;
-
-	// // add to the scene
-	// scene.add(pointLight2);
 
 	renderer.setClearColor( 0x1B1B1B, 1 );
 
@@ -195,7 +152,7 @@ $("canvas").click(function(){
 	cameray = initialcameray;
 })
 function animate() {
-	t += 0.005;
+	t += 0.0005;
 	directionalLight.position.set( camerax,cameray,cameraz);
 	WIDTH = $("#canvas").width();
 	HEIGHT = WIDTH = $("#canvas").height();

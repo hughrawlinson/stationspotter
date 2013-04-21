@@ -1,17 +1,17 @@
 <!--
-     _______..______      ___       ______  _______     __       _______.         
-    /       ||   _  \    /   \     /      ||   ____|   |  |     /       |         
-   |   (----`|  |_)  |  /  ^  \   |  ,----'|  |__      |  |    |   (----`         
-    \   \    |   ___/  /  /_\  \  |  |     |   __|     |  |     \   \             
-.----)   |   |  |     /  _____  \ |  `----.|  |____    |  | .----)   |            
-|_______/    | _|    /__/     \__\ \______||_______|   |__| |_______/             
+     ______..______      ___       ______  _______     __       _______.         
+    /  ____||   _  \    /   \     /  ____||   ____|   |  |     /  ____|         
+   |  (    `|  |_)  |  /  ^  \   |  ,    '|  |__      |  |    |  (    `         
+    \  \    |   ___/  /  /_\  \  |  |     |   __|     |  |     \  \             
+.____)  |   |  |     /  _____  \ |  `____.|  |____    |  | .____)  |            
+|______/    | _|    /__/     \__\ \______||_______|   |__| |______/             
                                                                                   
      ___   ____    __    ____  _______     _______.  ______   .___  ___.  _______ 
-    /   \  \   \  /  \  /   / |   ____|   /       | /  __  \  |   \/   | |   ____|
-   /  ^  \  \   \/    \/   /  |  |__     |   (----`|  |  |  | |  \  /  | |  |__   
-  /  /_\  \  \            /   |   __|     \   \    |  |  |  | |  |\/|  | |   __|  
- /  _____  \  \    /\    /    |  |____.----)   |   |  `--'  | |  |  |  | |  |____ 
-/__/     \__\  \__/  \__/     |_______|_______/     \______/  |__|  |__| |_______|
+    /   \  \   \  /  \  /   / |   ____|   /  ____| /  __  \  |   \/   | |   ____|
+   /  ^  \  \   \/    \/   /  |  |__     |  (    `|  |  |  | |  \  /  | |  |__   
+  /  /_\  \  \            /   |   __|     \  \    |  |  |  | |  |\/|  | |   __|  
+ /  _____  \  \    /\    /    |  |____.____)  |   |  `__'  | |  |  |  | |  |____ 
+/__/     \__\  \__/  \__/     |_______|______/     \______/  |__|  |__| |_______|
 -->
 <!--
   "Make sure the following is meta completed before launch
@@ -70,10 +70,10 @@
 			<tr><td><input type="submit" value="Submit"></td></tr>
 			</table>
 			</form>
-			<a id="closeReportBox">Close</a>
+			<a data-targetid="#reportbox" class="customModalClose" id="closeReportBox">Close</a>
 		</div>
 
-		<div id="aboutbox">
+		<div class="customModal" id="aboutbox">
 			<h2>What's going on up there?</h2>
 			<table>
 			<tr><td>Who?</td> <td id="peopleinspace"></td></tr>
@@ -81,7 +81,7 @@
 			<tr><td>I wanna see it</td> <td>maybe a dropdown menu and something, I don't know</td></tr>
 			</table>
 			</form>
-			<a id="closeAboutBox">Close</a>
+			<a data-targetid="#aboutbox" class="customModalClose" id="closeAboutBox">Close</a>
 		</div>
 
 		<div class="row" id="spherecanvas">
@@ -91,8 +91,8 @@
 
 		<nav>
 			<ul>
-			<li id="left"><a id="reporticon">Report a sighting</a></li>
-			<li id="right"><a id="abouticon">About the ISS</a></li>
+			<li id="left"><a data-targetid="#reportbox" class="customModalTrigger" id="reporticon">Report a sighting</a></li>
+			<li id="right"><a data-targetid="#aboutbox" class="customModalTrigger" id="abouticon">About the ISS</a></li>
 			</ul>
 		</nav>
 
