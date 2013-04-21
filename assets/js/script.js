@@ -1,11 +1,13 @@
 $(".customModalTrigger").click(function(){
-	$($(this).attr("data-targetid")).slideDown(300,function(){
-		$($(this).attr("data-targetid")).children().slideDown(300);
+	var elementid = $(this).attr("data-targetid");
+	$(elementid).slideDown(300,function(){
+		$(elementid).children().slideDown(300);
 	});
 });
-$("#customModalClose").click(function(){
-	$($(this).attr("data-targetid")).children().hide();
-	$($(this).attr("data-targetid")).slideUp(300);
+$(".customModalClose").click(function(){
+	var elementid = $(this).attr("data-targetid");
+	$(elementid).children().hide();
+	$(elementid).slideUp(300);
 });
 
 var radius = 119;
