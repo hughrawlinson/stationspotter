@@ -142,3 +142,9 @@ nav #right {
 	margin-top: 20px;
 	margin-left: 20px;
 }
+
+#nasalogo {
+	position: absolute;
+	margin-top: 20px;
+	right: 25px;
+}
