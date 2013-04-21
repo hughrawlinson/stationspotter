@@ -19,12 +19,13 @@ setInterval(function(){
 
 var latitude;
 var longitude;
+var stationPosition = new THREE.Vector3()
 function parseResponse(data){
   latitude = data.data.iss_position.latitude;
 	longitude = data.data.iss_position.longitude;
 
 	coords = lla2ecef(latitude,longitude,altitude);
-	stationPosition = new THREE.Vector3(coords[0],coords[1],coords[2]);
+	stationPosition.set(coords[0],coords[1],coords[2]);
 
 	station.position.x = stationPosition.x;
 	station.position.y = -stationPosition.y;
@@ -125,7 +126,7 @@ function init() {
 
 	var stationMaterial =
 		new THREE.MeshLambertMaterial({
-			color: 0xD7D7D7
+			color: 0xEA3140
 		});
 
 	station = new THREE.Mesh(
@@ -153,6 +154,7 @@ function init() {
 $("canvas").click(function(){
 	cameray = initialcameray;
 })
+
 function animate() {
 	t += 0.0005;
 	directionalLight.position.set( camerax,cameray,cameraz);
@@ -160,10 +162,10 @@ function animate() {
 	HEIGHT = WIDTH = $("#canvas").height();
 	
 	// station.translate(stationPosition)
-	camerax = 300*Math.sin(Math.PI*t);
-	cameraz = 300*Math.cos(Math.PI*t);
-
-	cameray = cameray / 1.075;
+	camerax = 300*Math.sin(Math.PI*(t+latitude*(Math.PI/180)));
+	cameraz = 300*Math.cos(Math.PI*(t+latitude*(Math.PI/180)+1));
+  cameray = cameray / 1.075;
+	
 	centerAltitude.setY(cameray-(cameray/3.5));
 	camera.position.set(camerax,cameray,cameraz);
 	camera.lookAt(centerAltitude);
