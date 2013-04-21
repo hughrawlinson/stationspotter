@@ -28,7 +28,7 @@
 	<meta charset='utf-8' />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
-	<title>Code O'Clock Webhack Template</title>
+	<title>StationSpotter</title>
 	<meta content='' name='description' />
 	<meta content='width=device-width' name='viewport' />
 	<link href='assets/css/style.css' rel='stylesheet' />
@@ -64,21 +64,19 @@
 		<img src="assets/img/nasalogo.png" width="108px"id="nasalogo">
 
 		<div class="customModal" id="reportbox">
-			<h2>REPORT A SIGHTING</h2>
+			<h2>REPORT</h2>
 			<div style="margin-left:15px;">
 				<p>Have you seen the International Space Station? Tell us!</p>
-				<button type="button" id="submit">I SAW THE ISS!</button>
+				<button type="button" id="submit">I JUST SAW THE ISS!</button>
 			</div>
 			<a data-targetid="#reportbox" class="customModalClose" id="closeReportBox">Close</a>
 		</div>
 
 		<div class="customModal" id="aboutbox">
-			<h2>What's going on up there?</h2>
-			<table>
-			<tr><td>Who?</td> <td id="peopleinspace"></td></tr>
-			<tr><td>Location</td> <td>the co-ordinates and nearest city?</td></tr>
-			<tr><td>I wanna see it</td> <td>maybe a dropdown menu and something, I don't know</td></tr>
-			</table>
+			<h2>ABOUT</h2>
+			<p>Since 1998 the International Space Station has been orbiting earth at an altitude between 205 and 270 miles. The station completes just under 15 orbits per day loaded with up to 6 crew working on a variety of microgravity and space environment research experiments in an array of varying fields. More info can be found on the <a href="http://www.nasa.gov/mission_pages/station/main/index.html" class="nasalinks"> NASA ISS Mission Page.</a></p>
+			<p>
+			Sign up to be notified when the ISS will be coming into view at your location at <a href="http://spotthestation.nasa.gov/" class="nasalinks"> spotthestation.nasa.gov</a>.</p>
 			</form>
 			<a data-targetid="#aboutbox" class="customModalClose" id="closeAboutBox">Close</a>
 		</div>
@@ -87,7 +85,6 @@
 			<div class="span12" id="display">
 			</div>
 		</div>
-
 		<nav>
 			<input id="slider" max="20" min="0" step="0.00001" type="range" />
 			<ul>
@@ -97,6 +94,7 @@
 		</nav>
 
 	</div> <!-- /container -->
+
 	<script src="http://js.pusher.com/2.0/pusher.min.js"></script>
 	<script src="assets/js/jquery-1.9.1.min.js"></script>
 	<script src="assets/js/intro.min.js"></script>
