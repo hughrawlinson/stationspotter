@@ -1,0 +1,68 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/bin/npm', 'install', 'http' ]
+info using npm@1.0.17
+info using node@v0.4.10
+verbose config file /Users/Hugh/.npmrc
+verbose config file /usr/etc/npmrc
+silly testEngine { name: 'pusher',
+silly testEngine   description: 'Node library for the Pusher server API',
+silly testEngine   version: '0.1.3',
+silly testEngine   author: { name: 'Pusher', email: 'support@pusher.com' },
+silly testEngine   contributors: 
+silly testEngine    [ { name: 'fabrik42', email: 'fabrik42@gmail.com' },
+silly testEngine      { name: 'Jaewoong Kim', email: 'jwoongkim@gmail.com' },
+silly testEngine      { name: 'Phil Leggetter',
+silly testEngine        email: 'phil@leggetter.co.uk' } ],
+silly testEngine   dependencies: { request: '=2.9.203' },
+silly testEngine   devDependencies: { vows: '=0.7.0' },
+silly testEngine   keywords: [ 'pusher', 'websockets', 'realtime' ],
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/pusher/pusher-node-server.git' },
+silly testEngine   main: 'index',
+silly testEngine   engines: { node: '>= 0.4.3' },
+silly testEngine   _npmJsonOpts: 
+silly testEngine    { file: '/Library/WebServer/Documents/stationspotter/node_modules/pusher/package.json',
+silly testEngine      wscript: false,
+silly testEngine      contributors: false,
+silly testEngine      serverjs: false },
+silly testEngine   _id: 'pusher@0.1.3',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.17',
+silly testEngine   _nodeVersion: 'v0.4.10',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /Library/WebServer/Documents/stationspotter/node_modules/pusher/package.json
+verbose loadDefaults pusher@0.1.3
+verbose into /Library/WebServer/Documents/stationspotter [ 'http' ]
+verbose cache add [ 'http', null ]
+info addNamed [ 'http', '' ]
+verbose addNamed [ null, '' ]
+verbose GET http
+verbose raw, before any munging http
+verbose url resolving [ 'http://registry.npmjs.org/', './http' ]
+verbose url resolved http://registry.npmjs.org/http
+verbose url parsed { protocol: 'http:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'http://registry.npmjs.org/http',
+verbose url parsed   pathname: '/http' }
+verbose response http://registry.npmjs.org/http
+silly chunk {"error":"not_found","reason":"document not found"}
+silly chunk 
+silly get cb [ 404,
+silly get cb   { server: 'CouchDB/1.3.0 (Erlang OTP/R15B03)',
+silly get cb     date: 'Sun, 21 Apr 2013 03:44:52 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '52',
+silly get cb     'cache-control': 'must-revalidate' } ]
+ERR! 404 'http' is not in the npm registry.
+ERR! 404 You should bug the author to publish it.
+ERR! 404 Note that you can also install from a tarball or folder.
+ERR! 
+ERR! System Darwin 12.3.0
+ERR! command "node" "/usr/bin/npm" "install" "http"
+ERR! cwd /Library/WebServer/Documents/stationspotter
+ERR! node -v v0.4.10
+ERR! npm -v 1.0.17
+verbose exit [ 1, true ]

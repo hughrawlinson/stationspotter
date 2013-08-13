@@ -19,7 +19,7 @@ var channel = pusher.subscribe('space_apps');
 channel.bind('sighting', function(data) {
   var userMaterial =
 		new THREE.MeshLambertMaterial({
-			color: 0x00FFFF
+			color: 0xEA3140
 		});
 
 	var user = new THREE.Mesh(
@@ -43,6 +43,7 @@ $("#submit").click(function(){
     navigator.geolocation.watchPosition(function(location){
     	d.latitude = location.coords.latitude;
     	d.longitude = location.coords.longitude;
+    	//var triggered = channel.trigger(sighting, d);
     	$.get("http://stg.crossfreq.com:3000",d);
     });
   }
@@ -57,8 +58,8 @@ var latitude;
 var longitude;
 var stationPosition = new THREE.Vector3()
 function parseResponse(data){
-  latitude = data.data.iss_position.latitude;
-	longitude = data.data.iss_position.longitude;
+  latitude = data.iss_position.latitude;
+	longitude = data.iss_position.longitude;
 
 	coords = lla2ecef(latitude,longitude,altitude);
 	stationPosition.set(coords[0],coords[1],coords[2]);
@@ -182,7 +183,7 @@ function init() {
 
 	var stationMaterial =
 		new THREE.MeshLambertMaterial({
-			color: 0xEA3140
+			color: 0x000000
 		});
 
 	station = new THREE.Mesh(
@@ -195,12 +196,12 @@ function init() {
 
 	scene.add(station);
 
-	var ambientLight = new THREE.AmbientLight(0x888888,0.1);
+	var ambientLight = new THREE.AmbientLight(0xFFFFFF,1);
         scene.add(ambientLight);
 
-  directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.4 );
-	directionalLight.position.set( camerax,cameray,cameraz);
-	scene.add( directionalLight );
+ //  directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.4 );
+	// directionalLight.position.set( camerax,cameray,cameraz);
+	// scene.add( directionalLight );
 
 	renderer.setClearColor( 0x1B1B1B, 1 );
 
@@ -217,7 +218,7 @@ $("#slider").change(function(){
 
 function animate() {
 	t += 0.0005 * rotateSpeed;
-	directionalLight.position.set( camerax,cameray,cameraz);
+	//directionalLight.position.set( camerax,cameray,cameraz);
 	WIDTH = $("#canvas").width();
 	HEIGHT = WIDTH = $("#canvas").height();
 	
