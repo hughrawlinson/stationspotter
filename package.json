@@ -1,0 +1,22 @@
+{
+  "name": "stationspotter",
+  "version": "1.0.0",
+  "description": "This was a project by @richardcahill and I for the International Space Apps Challenge in 2013. It visualises the location of the International Space Station on a three-dimensional globe in the web-browser. I've since started doing some upgrades.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hughrawlinson/stationspotter.git"
+  },
+  "author": "Hugh Rawlinson <hugh@codeoclock.net> (http://www.hughrawlinson.me/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hughrawlinson/stationspotter/issues"
+  },
+  "homepage": "https://github.com/hughrawlinson/stationspotter",
+  "dependencies": {
+    "bower": "^1.4.1"
+  }
+}
